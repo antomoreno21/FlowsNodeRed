@@ -1,0 +1,21 @@
+[
+    {
+        "id": "180326c4fbcdd967",
+        "type": "function",
+        "z": "a142310e0cbe22e2",
+        "name": "",
+        "func": "msg.topic = msg.payload.id;\nmsg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "acefaf7303555024"
+            ]
+        ]
+    }
+]
