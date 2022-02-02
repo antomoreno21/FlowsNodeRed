@@ -1,0 +1,355 @@
+[
+    {
+        "id": "bf68c35c4d177df8",
+        "type": "tab",
+        "label": "Ejercicio libre",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3e27dcc4a96217bc",
+        "type": "inject",
+        "z": "bf68c35c4d177df8",
+        "name": "Arduino",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temp\":\"16\",\"humedad\":\"85\"}",
+        "payloadType": "str",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "fd33ba3eb5db3641"
+            ]
+        ]
+    },
+    {
+        "id": "fd33ba3eb5db3641",
+        "type": "json",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 140,
+        "wires": [
+            [
+                "855c1cc9a0325b3e",
+                "9b86dcd37a24d07e"
+            ]
+        ]
+    },
+    {
+        "id": "855c1cc9a0325b3e",
+        "type": "function",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "func": "msg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 220,
+        "wires": [
+            [
+                "d3518bbf63375fdb",
+                "c052cb487fd5fb2d",
+                "16ba3f2d40c0d544"
+            ]
+        ]
+    },
+    {
+        "id": "9b86dcd37a24d07e",
+        "type": "function",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "func": "msg.payload = msg.payload.humedad;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "bd409328d49dec69",
+                "7490659dfd513d09"
+            ]
+        ]
+    },
+    {
+        "id": "bd409328d49dec69",
+        "type": "ui_text",
+        "z": "bf68c35c4d177df8",
+        "group": "dd70abe0.14cb38",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Humedad",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 720,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "d3518bbf63375fdb",
+        "type": "ui_gauge",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "group": "dd70abe0.14cb38",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Temperatura",
+        "label": "° C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "30",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 730,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "1dd350bb249a499a",
+        "type": "serial in",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "serial": "4b8899047ec80dac",
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "fd33ba3eb5db3641"
+            ]
+        ]
+    },
+    {
+        "id": "203e90ec6709945e",
+        "type": "serial out",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "serial": "4b8899047ec80dac",
+        "x": 700,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "5d6a0a752f495179",
+        "type": "ui_switch",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "label": "Relevador",
+        "tooltip": "",
+        "group": "40fb022b45652278",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "203e90ec6709945e"
+            ]
+        ]
+    },
+    {
+        "id": "c052cb487fd5fb2d",
+        "type": "ui_chart",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "group": "90addb4f6501eccc",
+        "order": 3,
+        "width": "8",
+        "height": "6",
+        "label": "Temperatura en Veracruz",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "40",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 770,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "16ba3f2d40c0d544",
+        "type": "ui_text",
+        "z": "bf68c35c4d177df8",
+        "group": "dd70abe0.14cb38",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Temperatura",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 730,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7490659dfd513d09",
+        "type": "ui_chart",
+        "z": "bf68c35c4d177df8",
+        "name": "",
+        "group": "90addb4f6501eccc",
+        "order": 4,
+        "width": "8",
+        "height": "6",
+        "label": "Humedad en Veracruz",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "60",
+        "ymax": "100",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 770,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd70abe0.14cb38",
+        "type": "ui_group",
+        "name": "Datos",
+        "tab": "e84ba552866f3ab1",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "4b8899047ec80dac",
+        "type": "serial-port",
+        "serialport": "/dev/ttyACM0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "40fb022b45652278",
+        "type": "ui_group",
+        "name": "Interruptores",
+        "tab": "e84ba552866f3ab1",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "90addb4f6501eccc",
+        "type": "ui_group",
+        "name": "Graficas",
+        "tab": "e84ba552866f3ab1",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "e84ba552866f3ab1",
+        "type": "ui_tab",
+        "name": "Temperatura y humedad",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
