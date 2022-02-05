@@ -1,0 +1,32 @@
+Hacer disponible mi dashboard en internet
+Pasos a seguir:
+
+1. Obtener la IP de mi maquina virtual en mi red local
+    Comandos: ifconfig
+    Importante: no funciona si no se configura la maquina virtual con conexión "adaptador puente".
+
+2. Obtener la IP publica en internet de la maquina virtual
+    Visitar el sitio web: https://www.whatismypublicip.com/
+    IP publlica: 201.97.21.80
+
+3. Acceder a la configuración del modem (en mi caso telmex) con IP 192.168.1.254
+    Para este paso se necesita conocer el usuario y el password del modem
+
+4. Habilitar el puerto 1880 del modem. La configuración puede variar dependiendo el proveedor y modelo del modem.
+    En caso de telmex: 
+    a) Ir a donde dice "NAT"
+    b) Mapeo de puertos
+    c) Agregar descripción
+    d) Selecciionar la IP de la maquina virtual (o agregarla manualmente)
+    e) Seleccionar protocolo TCP&UDP (o en su defecto TCP)
+    f) Puerto LAN y puerto publico colocar 1880 (puerto de Node-Red)
+
+5. Realizados los pasos anteriores, podrá acceder a su dashboard de la siguiente manera:
+    Colocar la IP publica de la maquina virtual en cualquier dispositivo que no este en la red local, seguido de
+    ":1880/ui". Ejemplo:
+    201.97.21.80:1880/ui
+
+Importante: Es posible que el firewall del windows bloquee la salida el puerto, para este caso revisar las configuraciones
+y crear reglas de entrada y salida en dicho puerto.
+
+Elaborado por: Antonio del Angel Moreno Carbajal
